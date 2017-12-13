@@ -1,0 +1,25 @@
+{
+  "name": "qualitycontrolgui",
+  "version": "1.0.0",
+  "description": "Explore ROOT objects",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js --trace-sync-io",
+    "dev": "nodemon --watch index.js --watch config.js index.js --trace-sync-io"
+  },
+  "author": "Vladimir Kosmala",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "@aliceo2/aliceo2-gui": "^1.1.4",
+    "bel": "^5.1.5",
+    "browserify": "^14.5.0",
+    "hyperx": "^2.3.2",
+    "jsroot": "^5.3.3",
+    "mithril": "^1.1.6",
+    "nanomorph": "^5.1.3",
+    "zeromq": "^4.6.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.1"
+  }
+}

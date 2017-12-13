@@ -1,0 +1,59 @@
+<style type="text/css">
+  .mo-graph-container { display: flex; }
+  .mo-graph { width: 200px; height: 200px; }
+</style>
+
+<div class="mo-graph-container">
+  <div class="mo-graph"></div>
+  <div class="mo-graph"></div>
+  <div class="mo-graph"></div>
+  <div class="mo-graph"></div>
+  <div class="mo-graph"></div>
+
+  <div class="mo-graph"></div>
+  <div class="mo-graph"></div>
+  <div class="mo-graph"></div>
+  <div class="mo-graph"></div>
+  <div class="mo-graph"></div>
+</div>
+
+<script type="text/javascript" src="jsroot/scripts/JSRootCore.js"></script>
+<script type="text/javascript" src="jsroot/libs/d3.js"></script>
+<script type="text/javascript" src="jsroot/scripts/JSRootPainter.js"></script>
+<script type="text/javascript" src="jsroot/scripts/JSRootPainter.hist.js"></script>
+
+<script>
+// JSROOT.gStyle.AutoStat = false;
+// JSROOT.gStyle.ContextMenu = true;
+// JSROOT.gStyle.CanEnlarge = false;
+// JSROOT.gStyle.DragAndDrop = false;
+// JSROOT.gStyle.DragAndDrop = false;
+// JSROOT.gStyle.DragAndDrop = false;
+// // JSROOT.gStyle.MoveResize = false; // div 2
+// JSROOT.gStyle.ToolBar = false;
+// JSROOT.gStyle.ZoomWheel = false;
+
+// JSROOT.gStyle.fFrameLineColor = 16;
+
+
+function histogram(el) {
+  var cnt = 0;
+  var histo = JSROOT.CreateTH2(20, 20);
+  for (var iy=0;iy<20;iy++)
+    for (var ix=0;ix<20;ix++) {
+       var bin = histo.getBin(ix+1, iy+1), val = 0;
+       switch (cnt % 4) {
+          case 1: val = ix + 19 - iy; break;
+          case 2: val = 38 - ix - iy; break;
+          case 3: val = 19 - ix + iy; break;
+          default: val = ix + iy; break;
+       }
+       histo.setBinContent(bin, val);
+    }
+
+  JSROOT.draw(el, histo, "colz");
+}
+
+var els = document.querySelectorAll('.mo-graph');
+els.forEach(el => histogram(el));
+</script>
