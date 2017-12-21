@@ -11,7 +11,16 @@
   <link rel="stylesheet" href="https://vcap.me:8443/bootstrap.css">
 
   <script>
+    // Inject token access into javascript from server template engine
     window.token = "{{token}}";
+
+    // Remove code from query string, allows refresh of the current page
+    // because code can be used only one time
+    (function() {
+      const url = new URL(location);
+      url.searchParams.delete('code');
+      history.replaceState({}, '', url);
+    })();
   </script>
 
   <!--[if lt IE 9]>
@@ -48,17 +57,22 @@
   window.bel = require('bel');
   window.hyperx = require('hyperx');
   window.mithril = require('mithril');
-  window.hx = hyperx(mithril);
 
-  window.html = hx;
-  window.render = require('mithril').render;
+  window.html = hyperx(mithril);
+  window.render = mithril.render;
 </script>
 
 <script type="text/javascript" src="/app/Observable.class.js"></script>
+<script type="text/javascript" src="/app/Router.class.js"></script>
 <script type="text/javascript" src="/app/Model.class.js"></script>
+<script type="text/javascript" src="/app/ObjectTree.class.js"></script>
 <script type="text/javascript" src="/app/jsroot.view.js"></script>
-<script type="text/javascript" src="/app/QCGHeader.view.js"></script>
-<script type="text/javascript" src="/app/QCGSidebar.view.js"></script>
+<script type="text/javascript" src="/app/qc-header.js"></script>
+<script type="text/javascript" src="/app/qc-sidebar.js"></script>
+<script type="text/javascript" src="/app/qc-folder.js"></script>
+<script type="text/javascript" src="/app/qc-collections.js"></script>
+<script type="text/javascript" src="/app/qc-collection.js"></script>
+<script type="text/javascript" src="/app/qc-objects.js"></script>
 <script type="text/javascript" src="/app/body.view.js"></script>
 
 <script>

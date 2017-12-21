@@ -1,4 +1,14 @@
-const log = require('@aliceo2/aliceo2-gui').Log;
+// Doc: https://github.com/winstonjs/winston/tree/2.x
+const winston = require('winston');
+const log = new winston.Logger({
+  transports: [
+    new winston.transports.Console(
+      {timestamp: true, colorize: true}
+    )
+  ],
+  exitOnError: true
+});
+
 const HttpServer = require('@aliceo2/aliceo2-gui').HttpServer;
 const Response = require('@aliceo2/aliceo2-gui').Response;
 const mysql = require('mysql');
@@ -6,14 +16,27 @@ const fs = require('fs');
 const model = require('./lib/QCModel.js');
 const config = require('./config.js');
 
-process.once('uncaughtException', function(e) {
-  if (e.code === 'EADDRINUSE') {
-    log.error('Port is already used');
+// Not working
+const log2 = require('@aliceo2/aliceo2-gui').Log;
+log2.configure({
+  winston: {
+    transports: [
+      new winston.transports.Console(
+        {timestamp: true, colorize: true}
+      )
+    ],
+    exitOnError: true
   }
-
-  log.error(e.stack || e);
-  process.exit(1);
 });
+
+// process.once('uncaughtException', function(e) {
+//   if (e.code === 'EADDRINUSE') {
+//     log.error('Port is already used');
+//   }
+
+//   log.error(e.stack || e);
+//   process.exit(1);
+// });
 
 // Quick check config at start
 log.info('HTTP full link: \t%s',

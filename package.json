@@ -17,6 +17,8 @@
     "jsroot": "^5.3.3",
     "mithril": "^1.1.6",
     "nanomorph": "^5.1.3",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
     "zeromq": "^4.6.0"
   },
   "devDependencies": {
